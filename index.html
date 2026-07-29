@@ -436,12 +436,12 @@
     if(GRUPO_NOMBRES.length){
       saludo.innerHTML='Hola, <b>'+(GRUPO_TITULO||unir(GRUPO_NOMBRES))+'</b>';
       saludo.hidden=false;
-      label.innerHTML=(GRUPO_NOMBRES.length>1?'¿Quiénes vienen? Marcá a cada uno':'¿Nos acompañás?')+' <span class="req">*</span>';
+      label.innerHTML='¿Confirmás? <span class="req">*</span>';
       GRUPO_NOMBRES.forEach(function(nombre,i){
         var row=document.createElement('div');row.className='persona';
         row.innerHTML='<span class="pnombre">'+nombre+'</span>'+
           '<div class="radios mini">'+
-          '<label class="radio-pill"><input type="radio" name="v'+i+'" value="si" checked><span>Viene</span></label>'+
+          '<label class="radio-pill"><input type="radio" name="v'+i+'" value="si" checked><span>Sí</span></label>'+
           '<label class="radio-pill"><input type="radio" name="v'+i+'" value="no"><span>No</span></label></div>';
         cont.appendChild(row);
       });
