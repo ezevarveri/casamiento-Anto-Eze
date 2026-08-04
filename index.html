@@ -352,7 +352,6 @@
     <div class="campo" id="personas-wrap"><label id="personas-label">¿Quiénes vienen? <span class="req">*</span></label><div id="personas"></div></div>
     <div class="campo"><label>Restricciones alimentarias (de alguien del grupo)</label><input type="text" id="f-comida" placeholder="Vegetariano, celíaco, alergias… o ninguna"></div>
     <div class="campo"><label>La canción que no puede faltar</label><input type="text" id="f-cancion" placeholder="El tema que te lleva a la pista"></div>
-    <div class="campo"><label>WhatsApp o mail <span class="req">*</span></label><input type="text" id="f-contacto" placeholder="Para enviarte novedades y recordatorios" required><div class="hint">lo usamos solo para avisarte cositas del casamiento</div></div>
     <div class="centro" style="margin-top:4px"><button type="submit" class="btn btn-ink">Generar mi entrada</button></div>
   </form>
   <div id="entrada" hidden>
@@ -493,7 +492,6 @@
 
     form.addEventListener('submit',function(e){
       e.preventDefault();
-      var contacto=document.getElementById('f-contacto').value.trim();
       var comida=document.getElementById('f-comida').value.trim()||'sin especificar';
       var cancion=document.getElementById('f-cancion').value.trim()||'sorpresa';
       var personas=[];
@@ -508,7 +506,6 @@
         var v0=(form.querySelector('input[name=v0]:checked')||{}).value||'si';
         personas.push({nombre:nombre,viene:v0});
       }
-      if(!contacto){alert('Dejanos un WhatsApp o mail así te mandamos novedades.');return;}
 
       var vienen=personas.filter(function(p){return p.viene==='si';}).map(function(p){return p.nombre;});
       var titulo=GRUPO_TITULO||unir(personas.map(function(p){return p.nombre;}));
@@ -523,10 +520,10 @@
       }
       tick();
 
-      enviarPlanilla({grupo:titulo,personas:personas,restricciones:comida,cancion:cancion,contacto:contacto});
+      enviarPlanilla({grupo:titulo,personas:personas,restricciones:comida,cancion:cancion});
 
       var lineas=personas.map(function(p){return p.nombre+' ('+(p.viene==='si'?'viene':'no')+')';}).join(', ');
-      var msg='Hola Anto y Eze, confirmamos: '+lineas+'. Restricción: '+comida+'. Canción: '+cancion+'. Contacto: '+contacto+'.';
+      var msg='Hola Anto y Eze, confirmamos: '+lineas+'. Restricción: '+comida+'. Canción: '+cancion+'.';
       document.getElementById('btn-wsp').href='https://wa.me/'+WSP_NOVIOS+'?text='+encodeURIComponent(msg);
       document.getElementById('btn-cal').href=icsHref();
 
